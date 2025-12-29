@@ -1,0 +1,33 @@
+name: Daily Project Health Check
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every night at midnight
+  workflow_dispatch: # Allows you to run it manually
+
+jobs:
+  health_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Syntax Check
+        run: python -m py_compile app.py
+
+      - name: Log Activity
+        run: |
+          echo "Health check passed on $(date)" >> health_log.txt
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add health_log.txt
+          git commit -m "chore: daily health check [automated]"
+          git push
