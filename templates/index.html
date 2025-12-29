@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Code Reviewer – Final Pro</title>
+    <style>
+        body {
+            background: #0f172a;
+            color: #e5e7eb;
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #020617;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        textarea, select {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+        }
+        button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: #22c55e;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .output {
+            background: #e5e7eb;
+            color: #020617;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 AI Code Reviewer – Final Pro</h1>
+
+        <form method="POST">
+            <select name="language">
+                <option>Python</option>
+                <option>Java</option>
+                <option>C</option>
+                <option>C++</option>
+                <option>JavaScript</option>
+            </select>
+
+            <textarea name="code" rows="12" placeholder="Paste your code here..."></textarea>
+
+            <button type="submit">Review Code</button>
+        </form>
+
+        {% if review %}
+        <div class="output">
+            {{ review }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
